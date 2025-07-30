@@ -4,7 +4,7 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electronmon ."
   },
   "repository": "https://github.com/electron/minimal-repro",
   "keywords": [
@@ -17,6 +17,11 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^37.2.4"
+    "electron": "^37.2.4",
+    "electron-rebuild": "^3.2.9",
+    "electronmon": "^1.0.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0"
   }
 }
