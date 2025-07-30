@@ -14,6 +14,10 @@ npm install --save-dev electronmon
 
 npm install better-sqlite3
 
+npm install tesseract.js
+
+npm install sweetalert2
+
 # electron-rebuild 
 
 npm install --save-dev electron-rebuild

@@ -37,7 +37,7 @@
                     <i class='bx' ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M16 17v2H2v-2s0-4 7-4s7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.4 3.4 0 0 0-1.93.59a5 5 0 0 1 0 5.82A3.4 3.4 0 0 0 15 11a3.5 3.5 0 0 0 0-7" />
                     </svg></i>
-                    <span class="text">Users</span>
+                    <span class="text">Students</span>
                 </a>
             </li>
             <li>
@@ -45,28 +45,11 @@
                     <i class='bx' >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M6.271 2.112c-.81.106-1.238.301-1.544.6c-.305.3-.504.72-.613 1.513C4.002 5.042 4 6.124 4 7.675v8.57a4.2 4.2 0 0 1 1.299-.593c.528-.139 1.144-.139 2.047-.138H20V7.676c0-1.552-.002-2.634-.114-3.451c-.109-.793-.308-1.213-.613-1.513c-.306-.299-.734-.494-1.544-.6c-.834-.11-1.938-.112-3.522-.112H9.793c-1.584 0-2.688.002-3.522.112m.488 4.483c0-.448.37-.811.827-.811h8.828a.82.82 0 0 1 .827.81a.82.82 0 0 1-.827.811H7.586a.82.82 0 0 1-.827-.81m.827 2.973a.82.82 0 0 0-.827.81c0 .448.37.811.827.811h5.517a.82.82 0 0 0 .828-.81a.82.82 0 0 0-.828-.811z" clip-rule="evenodd"/><path fill="currentColor" d="M7.473 17.135H20c-.003 1.13-.021 1.974-.113 2.64c-.109.793-.308 1.213-.613 1.513c-.306.299-.734.494-1.544.6c-.834.11-1.938.112-3.522.112H9.793c-1.584 0-2.688-.002-3.522-.111c-.81-.107-1.238-.302-1.544-.601c-.305-.3-.504-.72-.613-1.513c-.041-.3-.068-.637-.084-1.02a2.46 2.46 0 0 1 1.697-1.537c.29-.076.667-.083 1.746-.083"/></svg>
                 </i>
-                    <span class="text">Booking</span>
+                    <span class="text">Archives</span>
                 </a>
             </li>
 
-            <li>
-                <a href="#" id="asstitant-link">
-                    <i class='bx' >
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 11l2.48-5.788A2 2 0 0 1 7.32 4h9.362a2 2 0 0 1 1.838 1.212L21 11M3 11h18M3 11v7m18-7v7m-3 0v.5a1.5 1.5 0 0 0 1.5 1.5v0a1.5 1.5 0 0 0 1.5-1.5V18m-3 0H6m12 0h3M6 18v.5A1.5 1.5 0 0 1 4.5 20v0A1.5 1.5 0 0 1 3 18.5V18m3 0H3"/><path fill="currentColor" fill-rule="evenodd" d="M3 11h18v7H3zm3 3a1 1 0 0 1 1-1h.001a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1m11-1a1 1 0 1 0 0 2h.001a1 1 0 1 0 0-2z" clip-rule="evenodd"/></g></svg>
-                </i>
-                    <span class="text">Car</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" id="members-link">
-                    <i class='bx' >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 9h5.5L16 3.5zM7 2h10l6 6v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2M3 6v16h18v2H3a2 2 0 0 1-2-2V6z"/></svg>
-
-                    </i>
-                    <span class="text">Logs</span>
-                </a>
-            </li>
-           
+     
             
             
             
@@ -177,7 +160,7 @@
                     </div>
                     <div class="todo">
                         <div class="head">
-                            <h3>Latest Users</h3>
+                            <h3>Latest Students</h3>
                             <i class='bx' id="TodoBtn"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="6" r="4" fill="currentColor"/><path fill="currentColor" d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5"/></svg></i>
                         </div>
                         <table>
@@ -250,10 +233,27 @@
  <main>
     <main>
         <div id="analytics-content" style="display: none;">
+
+                <!-- Floating Button -->
+        <button id="addCarBtn" style="
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+        ">+</button>
+
                 <div class="table-data">
                     <div class="order">
                         <div class="head">
-                            <h3>Users</h3>
+                            <h3>Students</h3>
                         </div>
                         <table>
                             <thead>
@@ -306,7 +306,7 @@
                 <div class="table-data">
                     <div class="order">
                         <div class="head">
-                            <h3>Bookings</h3>
+                            <h3>Archives</h3>
                         </div>
                         <table>
                             <thead>
@@ -343,21 +343,7 @@
         <main>
             <div id="asstitant-content" style="display: none;">
                
-    <!-- Floating Button -->
-    <button id="addCarBtn" style="
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-        cursor: pointer;
-        box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
-    ">+</button>
+
 
            
         
@@ -390,22 +376,20 @@
 
             
         </main>
-        
-   
+
+
 
 
     </section>
-   
-     <!-- You can also require other files to run in this process -->
- <script src="./js/renderer.js"></script>
-  <script src="./js/script.js"></script>
-    <script src="./js/functions.js"></script>
-     <!--Import Scripts-->
-<!-- Include this in your HTML HEAD or before closing body if not yet included -->
+
+     <!-- Imports -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://unpkg.com/sweetalert2@10"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="./js/renderer.js"></script>
+<script src="./js/addStudent.js" type="module"></script>
+<script src="./js/script.js"></script>
+<script src="./js/functions.js"></script>
 
 </body>
 </html>

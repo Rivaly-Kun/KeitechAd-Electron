@@ -1,23 +1,40 @@
-// Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
-const db = require('./db'); // Assumes you have a db.js that connects to studentdata.db
+const db = require('./db'); // Assumes db.js exports insertStudent, getAllAdmissions, getAdmissionById
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    fullscreen: true, // Fullscreen window
+    fullscreen: true,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,  // ✅ Security: isolates preload
+      nodeIntegration: false   // ✅ Security: disables Node in renderer
     }
   });
 
   mainWindow.loadFile('index.html');
 
-  // Optional: Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  // Optional: DevTools for debugging
+  mainWindow.webContents.openDevTools();
 }
 
-// ✅ IPC handlers should be declared outside createWindow
+// IPC handlers
+ipcMain.handle('insert-student', async (event, formData) => {
+  console.log('≡ insert-student received in main process');
+  console.log('📝 FormData Keys:', Object.keys(formData));
+  console.log('📝 uli_number value:', formData.uli_number);
+  try {
+    db.insertStudent(formData);
+    return { success: true };
+  } catch (err) {
+    console.error('DB Error:', err);
+    return { success: false, error: err.message };
+  }
+});
+
+
+
+
 ipcMain.handle('get-all-admissions', () => {
   return db.getAllAdmissions();
 });
@@ -26,17 +43,15 @@ ipcMain.handle('get-admission-by-id', (event, id) => {
   return db.getAdmissionById(id);
 });
 
-// App ready
+// App lifecycle
 app.whenReady().then(() => {
   createWindow();
 
-  app.on('activate', function () {
-    // Recreate window on macOS when dock icon is clicked
+  app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
 
-// Quit when all windows are closed (except on macOS)
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
