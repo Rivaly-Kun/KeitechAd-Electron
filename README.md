@@ -6,7 +6,7 @@ npm install
 
 npm start
 
-# E lectronmon as a dev dependency (Reliable Auto Reloader)
+# Electronmon as a dev dependency (Reliable Auto Reloader)
 
 npm install --save-dev electronmon
 
