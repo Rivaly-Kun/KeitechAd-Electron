@@ -12,7 +12,7 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="./styles.css">
     <link rel="icon" type="image/png" href="./img/download.jpg">
-    <title>Admin - RentSwift</title>
+    <title>Student Admission - Keitech</title>
 
 
 </head>
@@ -20,7 +20,7 @@
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="#" class="brand">
-            <img src="./img/NewLogo.png" id="Shopicon" class='bx'>
+            <img src="./img/logokeitech.png" id="Shopicon" class='bx'>
      
         </a>
         <ul class="side-menu top">
@@ -250,49 +250,32 @@
             box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
         ">+</button>
 
-                <div class="table-data">
-                    <div class="order">
-                        <div class="head">
-                            <h3>Students</h3>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="VerifiedUsers"></tbody>
-                                <!-- User data will be dynamically loaded here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!--Verify Users-->
-                <div class="table-data">
-                    <div class="order">
-                        <div class="head">
-                            <h3>Verify Users</h3>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="UnverifiedUsers"></tbody>
-                                <!-- User data will be dynamically loaded here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+          <div class="table-data">
+    <div class="order">
+        <div class="head">
+            <h3>Students</h3>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email / Facebook</th>
+                    <th>Contact #</th>
+                    <th>Course</th>
+                    <th>ULI No.</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="VerifiedUsers">
+                <!-- Dynamically inserted rows here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+                
+         
         </div>
     </main>
     
@@ -385,6 +368,7 @@
      <!-- Imports -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js"></script>
 
 <script src="./js/renderer.js"></script>
 <script src="./js/addStudent.js" type="module"></script>

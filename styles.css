@@ -605,10 +605,12 @@ body {
 	box-sizing: content-box;
 }
 #sidebar .brand .bx {
-    min-width: 205px;
-    min-height: 70px;
-	display: flex;
-	justify-content: center;
+        min-width: 100px;
+    min-height: 100px;
+    margin-top: 50px;
+    margin-left: 80px;
+    display: flex;
+    justify-content: center;
 }
 #sidebar .side-menu {
 	width: 100%;

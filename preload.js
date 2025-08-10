@@ -5,7 +5,7 @@ console.log('✅ preload.js is running');
 contextBridge.exposeInMainWorld('api', {
   getAllAdmissions: () => ipcRenderer.invoke('get-all-admissions'),
   getAdmissionById: (id) => ipcRenderer.invoke('get-admission-by-id', id),
-  insertStudent: (data) => ipcRenderer.invoke('insert-student', data)
+  insertStudent: (data) => ipcRenderer.invoke('insertStudent', data)
 });
 
 // (Optional) Keep your DOMContentLoaded version display

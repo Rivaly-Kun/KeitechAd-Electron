@@ -1,29 +1,59 @@
+
 const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('node:path');
-const db = require('./db'); // Assumes db.js exports insertStudent, getAllAdmissions, getAdmissionById
+const path = require('node:path');  // ✅ Clean import
+const fs = require('fs');           // ✅ For saving files
+const db = require('./db');         // ✅ Your database module
+
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
     fullscreen: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: true,  // ✅ Security: isolates preload
-      nodeIntegration: false   // ✅ Security: disables Node in renderer
+      contextIsolation: true,
+      nodeIntegration: false
     }
   });
 
   mainWindow.loadFile('index.html');
-
-  // Optional: DevTools for debugging
-  mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools(); // Optional
 }
 
 // IPC handlers
-ipcMain.handle('insert-student', async (event, formData) => {
-  console.log('≡ insert-student received in main process');
-  console.log('📝 FormData Keys:', Object.keys(formData));
-  console.log('📝 uli_number value:', formData.uli_number);
+ipcMain.handle('insertStudent', async (event, formData) => {
   try {
+    const uid = formData.uid;
+
+    // Create folders if they don't exist
+    const imgDir = path.join(__dirname, 'studentimgs');
+    const sigDir = path.join(__dirname, 'sighnatures');
+    if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir);
+    if (!fs.existsSync(sigDir)) fs.mkdirSync(sigDir);
+
+    // Save ID picture
+    if (formData.id_picture) {
+      const idPicPath = path.join(imgDir, `${uid}_id.jpg`);
+      const base64Data = formData.id_picture.replace(/^data:image\/\w+;base64,/, '');
+      fs.writeFileSync(idPicPath, base64Data, 'base64');
+      formData.id_picture = idPicPath;
+    }
+
+    // Save signature 1
+    if (formData.signature_image) {
+      const sig1Path = path.join(sigDir, `${uid}_signature1.png`);
+      const base64Data = formData.signature_image.replace(/^data:image\/\w+;base64,/, '');
+      fs.writeFileSync(sig1Path, base64Data, 'base64');
+      formData.signature_image = sig1Path;
+    }
+
+    // Save signature 2
+    if (formData.voucher_signature_image) {
+      const sig2Path = path.join(sigDir, `${uid}_signature2.png`);
+      const base64Data = formData.voucher_signature_image.replace(/^data:image\/\w+;base64,/, '');
+      fs.writeFileSync(sig2Path, base64Data, 'base64');
+      formData.voucher_signature_image = sig2Path;
+    }
+
     db.insertStudent(formData);
     return { success: true };
   } catch (err) {
@@ -32,21 +62,12 @@ ipcMain.handle('insert-student', async (event, formData) => {
   }
 });
 
-
-
-
-ipcMain.handle('get-all-admissions', () => {
-  return db.getAllAdmissions();
-});
-
-ipcMain.handle('get-admission-by-id', (event, id) => {
-  return db.getAdmissionById(id);
-});
+ipcMain.handle('get-all-admissions', () => db.getAllAdmissions());
+ipcMain.handle('get-admission-by-id', (event, id) => db.getAdmissionById(id));
 
 // App lifecycle
 app.whenReady().then(() => {
   createWindow();
-
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
