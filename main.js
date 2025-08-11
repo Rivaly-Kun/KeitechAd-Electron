@@ -22,37 +22,41 @@ function createWindow() {
 // IPC handlers
 ipcMain.handle('insertStudent', async (event, formData) => {
   try {
-    const uid = formData.uid;
+const uid = formData.uid;
 
-    // Create folders if they don't exist
-    const imgDir = path.join(__dirname, 'studentimgs');
-    const sigDir = path.join(__dirname, 'sighnatures');
-    if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir);
-    if (!fs.existsSync(sigDir)) fs.mkdirSync(sigDir);
+// Create folders if they don't exist
+const imgDir = path.join('./studentimgs');
+const sigDir = path.join('./signatures');
+if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir, { recursive: true });
+if (!fs.existsSync(sigDir)) fs.mkdirSync(sigDir, { recursive: true });
 
-    // Save ID picture
-    if (formData.id_picture) {
-      const idPicPath = path.join(imgDir, `${uid}_id.jpg`);
-      const base64Data = formData.id_picture.replace(/^data:image\/\w+;base64,/, '');
-      fs.writeFileSync(idPicPath, base64Data, 'base64');
-      formData.id_picture = idPicPath;
-    }
+// Save ID picture
+if (formData.id_picture) {
+  const fileName = `${uid}_id.jpg`;
+  const idPicPath = path.join(imgDir, fileName);
+  const base64Data = formData.id_picture.replace(/^data:image\/\w+;base64,/, '');
+  fs.writeFileSync(idPicPath, base64Data, 'base64');
+  formData.id_picture = path.join('studentimgs', fileName); // <-- relative path for DB
+}
 
-    // Save signature 1
-    if (formData.signature_image) {
-      const sig1Path = path.join(sigDir, `${uid}_signature1.png`);
-      const base64Data = formData.signature_image.replace(/^data:image\/\w+;base64,/, '');
-      fs.writeFileSync(sig1Path, base64Data, 'base64');
-      formData.signature_image = sig1Path;
-    }
+// Save signature 1
+if (formData.signature_image) {
+  const fileName = `${uid}_signature1.png`;
+  const sig1Path = path.join(sigDir, fileName);
+  const base64Data = formData.signature_image.replace(/^data:image\/\w+;base64,/, '');
+  fs.writeFileSync(sig1Path, base64Data, 'base64');
+  formData.signature_image = path.join('signatures', fileName); // <-- relative path for DB
+}
 
-    // Save signature 2
-    if (formData.voucher_signature_image) {
-      const sig2Path = path.join(sigDir, `${uid}_signature2.png`);
-      const base64Data = formData.voucher_signature_image.replace(/^data:image\/\w+;base64,/, '');
-      fs.writeFileSync(sig2Path, base64Data, 'base64');
-      formData.voucher_signature_image = sig2Path;
-    }
+// Save signature 2
+if (formData.voucher_signature_image) {
+  const fileName = `${uid}_signature2.png`;
+  const sig2Path = path.join(sigDir, fileName);
+  const base64Data = formData.voucher_signature_image.replace(/^data:image\/\w+;base64,/, '');
+  fs.writeFileSync(sig2Path, base64Data, 'base64');
+  formData.voucher_signature_image = path.join('signatures', fileName); // <-- relative path for DB
+}
+
 
     db.insertStudent(formData);
     return { success: true };
