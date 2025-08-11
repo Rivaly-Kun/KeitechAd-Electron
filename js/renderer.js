@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <td>${student.uli_number || ''}</td>
         <td>${status}</td>
         <td>
-          <button class="view-btn" data-id="${student.id}">View</button>
+          <button class="view-btn" data-id="${student.id}" id="viewBtn">View</button>
         </td>
       `;
 

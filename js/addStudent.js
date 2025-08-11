@@ -1,12 +1,12 @@
   document.addEventListener('DOMContentLoaded', () => {
-    const addCarBtn = document.getElementById('addCarBtn');
+    const addStudentBtn = document.getElementById('addStudentBtn');
 
-    if (!addCarBtn) {
-      console.warn('Button #addCarBtn not found — check the HTML.');
+    if (!addStudentBtn) {
+      console.warn('Button #addStudentBtn not found — check the HTML.');
       return;
     }
 
-    addCarBtn.addEventListener('click', () => {
+    addStudentBtn.addEventListener('click', () => {
       Swal.fire({
         title: 'Registration Form',
         width: '90%',
