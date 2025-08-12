@@ -11,7 +11,7 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
-      nodeIntegration: false
+      nodeIntegration: true
     }
   });
 
@@ -66,28 +66,9 @@ ipcMain.handle('insertStudent', async (event, formData) => {
   }
 });
 
+
 ipcMain.handle('get-all-admissions', () => db.getAllAdmissions());
 ipcMain.handle('get-admission-by-id', (event, id) => db.getAdmissionById(id));
-
-ipcMain.handle('get-admission-by-id', async (event, id) => {
-    const student = db.getAdmissionById(id);
-    const baseDir = "C:/Users/asses/OneDrive/Desktop/keitechaddmission/KeitechAd-Electron";
-
-    student.idPicURL = student.id_picture 
-        ? `file://${path.join(baseDir, student.id_picture).replace(/\\/g, '/')}`
-        : null;
-
-    student.sig1URL = student.signature_image 
-        ? `file://${path.join(baseDir, student.signature_image).replace(/\\/g, '/')}`
-        : null;
-
-    student.sig2URL = student.voucher_signature_image 
-        ? `file://${path.join(baseDir, student.voucher_signature_image).replace(/\\/g, '/')}`
-        : null;
-
-    return student;
-});
-
 
 // App lifecycle
 app.whenReady().then(() => {

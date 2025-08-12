@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', async () => {
   const students = await window.api.getAllAdmissions();
   const tableBody = document.getElementById('VerifiedUsers');
@@ -39,26 +38,26 @@ document.querySelectorAll('.view-btn').forEach(btn => {
   btn.addEventListener('click', async () => {
     const studentId = btn.getAttribute('data-id');
 
-const student = await window.api.getAdmissionById(id);
+    // Get student from DB
+    const student = await window.api.getAdmissionById(studentId);
 
-if (student.idPicURL) {
-    document.getElementById('idPictureBox').innerHTML = `<img src="${student.idPicURL}" style="max-width:300px;">`;
-}
 
-if (student.sig1URL) {
-    const ctx = document.getElementById('signaturePad1').getContext('2d');
-    const img = new Image();
-    img.src = student.sig1URL;
-    img.onload = () => ctx.drawImage(img, 0, 0, 300, 150);
-}
+const path = require('path');
 
-if (student.sig2URL) {
-    const ctx = document.getElementById('signaturePad2').getContext('2d');
-    const img = new Image();
-    img.src = student.sig2URL;
-    img.onload = () => ctx.drawImage(img, 0, 0, 300, 150);
-}
+const baseDir = "C:/Users/Kurt Dichosa/OneDrive/Documents/Keitech_Addmission/KeitechAd-Electron/signatures";
 
+// Build full paths from stored relative paths
+const idPicPath = student.id_picture 
+    ? path.join(baseDir, student.id_picture)
+    : null;
+
+const sig1Path = student.signature_image 
+    ? path.join(baseDir, student.signature_image)
+    : null;
+
+const sig2Path = student.voucher_signature_image 
+    ? path.join(baseDir, student.voucher_signature_image)
+    : null;
 
 // Convert to file:// URLs
 const idPicURL = idPicPath ? `file://${idPicPath.replace(/\\/g, '/')}` : null;
