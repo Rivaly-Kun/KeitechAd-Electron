@@ -19,7 +19,7 @@
   "devDependencies": {
     "electron": "^37.2.4",
     "electron-rebuild": "^3.2.9",
-    "electronmon": "^1.0.0"
+    "electronmon": "^1.1.2"
   },
   "dependencies": {
     "better-sqlite3": "^12.2.0",

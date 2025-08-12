@@ -9,6 +9,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     const tableBody = document.getElementById('VerifiedUsers');
     tableBody.innerHTML = '';
 
+    if (!students || students.length === 0) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td colspan="7" style="text-align:center; font-style:italic; color:gray;">
+          No students in the table
+        </td>
+      `;
+      tableBody.appendChild(tr);
+      return; // stop execution here
+    }
+
     students.forEach(student => {
       const tr = document.createElement('tr');
       const fullName = `${student.last_name || ''}, ${student.first_name || ''} ${student.middle_name || ''}`.trim();

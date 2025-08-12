@@ -22,42 +22,42 @@ function createWindow() {
 // IPC handlers
 ipcMain.handle('insertStudent', async (event, formData) => {
   try {
-const uid = formData.uid;
+    const uid = formData.uid;
 
-// Create folders if they don't exist
-const imgDir = path.join('./studentimgs');
-const sigDir = path.join('./signatures');
-if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir, { recursive: true });
-if (!fs.existsSync(sigDir)) fs.mkdirSync(sigDir, { recursive: true });
+    // Create folders if they don't exist
+    const imgDir = path.join('./studentimgs');
+    const sigDir = path.join('./signatures');
+    if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir, { recursive: true });
+    if (!fs.existsSync(sigDir)) fs.mkdirSync(sigDir, { recursive: true });
 
-// Save ID picture
-if (formData.id_picture) {
-  const fileName = `${uid}_id.jpg`;
-  const idPicPath = path.join(imgDir, fileName);
-  const base64Data = formData.id_picture.replace(/^data:image\/\w+;base64,/, '');
-  fs.writeFileSync(idPicPath, base64Data, 'base64');
-  formData.id_picture = path.join('studentimgs', fileName); // <-- relative path for DB
-}
+    // Save ID picture
+    if (formData.id_picture) {
+      const fileName = `${uid}_id.jpg`;
+      const idPicPath = path.join(imgDir, fileName);
+      const base64Data = formData.id_picture.replace(/^data:image\/\w+;base64,/, '');
+      fs.writeFileSync(idPicPath, base64Data, 'base64');
+      formData.id_picture = uid; // ✅ store UID only
+    }
 
-// Save signature 1
-if (formData.signature_image) {
-  const fileName = `${uid}_signature1.png`;
-  const sig1Path = path.join(sigDir, fileName);
-  const base64Data = formData.signature_image.replace(/^data:image\/\w+;base64,/, '');
-  fs.writeFileSync(sig1Path, base64Data, 'base64');
-  formData.signature_image = path.join('signatures', fileName); // <-- relative path for DB
-}
+    // Save signature 1
+    if (formData.signature_image) {
+      const fileName = `${uid}_signature1.png`;
+      const sig1Path = path.join(sigDir, fileName);
+      const base64Data = formData.signature_image.replace(/^data:image\/\w+;base64,/, '');
+      fs.writeFileSync(sig1Path, base64Data, 'base64');
+      formData.signature_image = uid; // ✅ store UID only
+    }
 
-// Save signature 2
-if (formData.voucher_signature_image) {
-  const fileName = `${uid}_signature2.png`;
-  const sig2Path = path.join(sigDir, fileName);
-  const base64Data = formData.voucher_signature_image.replace(/^data:image\/\w+;base64,/, '');
-  fs.writeFileSync(sig2Path, base64Data, 'base64');
-  formData.voucher_signature_image = path.join('signatures', fileName); // <-- relative path for DB
-}
+    // Save signature 2
+    if (formData.voucher_signature_image) {
+      const fileName = `${uid}_signature2.png`;
+      const sig2Path = path.join(sigDir, fileName);
+      const base64Data = formData.voucher_signature_image.replace(/^data:image\/\w+;base64,/, '');
+      fs.writeFileSync(sig2Path, base64Data, 'base64');
+      formData.voucher_signature_image = uid; // ✅ store UID only
+    }
 
-
+    // Save in DB
     db.insertStudent(formData);
     return { success: true };
   } catch (err) {
@@ -68,6 +68,26 @@ if (formData.voucher_signature_image) {
 
 ipcMain.handle('get-all-admissions', () => db.getAllAdmissions());
 ipcMain.handle('get-admission-by-id', (event, id) => db.getAdmissionById(id));
+
+ipcMain.handle('get-admission-by-id', async (event, id) => {
+    const student = db.getAdmissionById(id);
+    const baseDir = "C:/Users/asses/OneDrive/Desktop/keitechaddmission/KeitechAd-Electron";
+
+    student.idPicURL = student.id_picture 
+        ? `file://${path.join(baseDir, student.id_picture).replace(/\\/g, '/')}`
+        : null;
+
+    student.sig1URL = student.signature_image 
+        ? `file://${path.join(baseDir, student.signature_image).replace(/\\/g, '/')}`
+        : null;
+
+    student.sig2URL = student.voucher_signature_image 
+        ? `file://${path.join(baseDir, student.voucher_signature_image).replace(/\\/g, '/')}`
+        : null;
+
+    return student;
+});
+
 
 // App lifecycle
 app.whenReady().then(() => {
