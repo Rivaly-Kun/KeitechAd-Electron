@@ -3,6 +3,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   const tableBody = document.getElementById('VerifiedUsers');
   tableBody.innerHTML = '';
 
+  if (!students || students.length === 0) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td colspan="7" style="text-align:center; font-style:italic; color:gray;">
+        No students in the table
+      </td>
+    `;
+    tableBody.appendChild(tr);
+    return; // stop further execution
+  }
+
   students.forEach(student => {
     const tr = document.createElement('tr');
     const fullName = `${student.last_name || ''}, ${student.first_name || ''} ${student.middle_name || ''}`.trim();
@@ -30,9 +41,66 @@ document.querySelectorAll('.view-btn').forEach(btn => {
     // Get student from DB
     const student = await window.api.getAdmissionById(studentId);
 
+<<<<<<< HEAD
     const idPicPath = student.id_picture ? `./${student.id_picture}` : null;
     const sig1Path = student.signature_image ? `./${student.signature_image}` : null;
     const sig2Path = student.voucher_signature_image ? `./${student.voucher_signature_image}` : null;
+=======
+
+const path = require('path');
+
+const baseDir = "C:/Users/Kurt Dichosa/OneDrive/Documents/Keitech_Addmission/KeitechAd-Electron/signatures";
+
+// Build full paths from stored relative paths
+const idPicPath = student.id_picture 
+    ? path.join(baseDir, student.id_picture)
+    : null;
+
+const sig1Path = student.signature_image 
+    ? path.join(baseDir, student.signature_image)
+    : null;
+
+const sig2Path = student.voucher_signature_image 
+    ? path.join(baseDir, student.voucher_signature_image)
+    : null;
+>>>>>>> 39d8b509a3ecb9cbdb8232faffc0d15779ea3a5c
+
+// Convert to file:// URLs
+const idPicURL = idPicPath ? `file://${idPicPath.replace(/\\/g, '/')}` : null;
+const sig1URL = sig1Path ? `file://${sig1Path.replace(/\\/g, '/')}` : null;
+const sig2URL = sig2Path ? `file://${sig2Path.replace(/\\/g, '/')}` : null;
+
+
+// --- Display ID Picture ---
+if (idPicURL) {
+    document.getElementById('idPictureBox').innerHTML = `
+        <img src="${idPicURL}" alt="ID Picture" style="max-width:300px; border:1px solid #000;">
+    `;
+}
+
+// --- Display Signature 1 in canvas ---
+if (sig1URL) {
+    const canvas1 = document.getElementById('signaturePad1');
+    const ctx1 = canvas1.getContext('2d');
+    const img1 = new Image();
+    img1.src = sig1URL;
+    img1.onload = () => {
+        ctx1.drawImage(img1, 0, 0, canvas1.width, canvas1.height);
+    };
+}
+
+// --- Display Signature 2 in canvas ---
+if (sig2URL) {
+    const canvas2 = document.getElementById('signaturePad2');
+    const ctx2 = canvas2.getContext('2d');
+    const img2 = new Image();
+    img2.src = sig2URL;
+    img2.onload = () => {
+        ctx2.drawImage(img2, 0, 0, canvas2.width, canvas2.height);
+    };
+}
+
+
 
 
       Swal.fire({
