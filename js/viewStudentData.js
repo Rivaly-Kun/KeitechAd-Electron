@@ -41,29 +41,9 @@ document.querySelectorAll('.view-btn').forEach(btn => {
     // Get student from DB
     const student = await window.api.getAdmissionById(studentId);
 
-<<<<<<< HEAD
     const idPicPath = student.id_picture ? `./${student.id_picture}` : null;
     const sig1Path = student.signature_image ? `./${student.signature_image}` : null;
     const sig2Path = student.voucher_signature_image ? `./${student.voucher_signature_image}` : null;
-=======
-
-const path = require('path');
-
-const baseDir = "C:/Users/Kurt Dichosa/OneDrive/Documents/Keitech_Addmission/KeitechAd-Electron/signatures";
-
-// Build full paths from stored relative paths
-const idPicPath = student.id_picture 
-    ? path.join(baseDir, student.id_picture)
-    : null;
-
-const sig1Path = student.signature_image 
-    ? path.join(baseDir, student.signature_image)
-    : null;
-
-const sig2Path = student.voucher_signature_image 
-    ? path.join(baseDir, student.voucher_signature_image)
-    : null;
->>>>>>> 39d8b509a3ecb9cbdb8232faffc0d15779ea3a5c
 
 // Convert to file:// URLs
 const idPicURL = idPicPath ? `file://${idPicPath.replace(/\\/g, '/')}` : null;
