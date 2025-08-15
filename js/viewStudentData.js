@@ -30,20 +30,9 @@ document.querySelectorAll('.view-btn').forEach(btn => {
     // Get student from DB
     const student = await window.api.getAdmissionById(studentId);
 
-    // Build image paths (relative to your app)
-const baseDir = "C:\\Users\\asses\\OneDrive\\Desktop\\keitechaddmission\\KeitechAd-Electron";
-
-const idPicPath = student.id_picture 
-    ? `${baseDir}\\${student.id_picture}`
-    : null;
-
-const sig1Path = student.signature_image 
-    ? `${baseDir}\\${student.signature_image}`
-    : null;
-
-const sig2Path = student.voucher_signature_image 
-    ? `${baseDir}\\${student.voucher_signature_image}`
-    : null;
+    const idPicPath = student.id_picture ? `./${student.id_picture}` : null;
+    const sig1Path = student.signature_image ? `./${student.signature_image}` : null;
+    const sig2Path = student.voucher_signature_image ? `./${student.voucher_signature_image}` : null;
 
 
       Swal.fire({
@@ -147,7 +136,7 @@ const sig2Path = student.voucher_signature_image
   </style>
 
   <form id="learnerForm">
-    <div id="idPictureBox">I.D. Picture</div>
+    <img id="idPictureBox" src="${student.id_picture}">I.D. Picture</img>
     <h2>LEARNER'S PROFILE FORM</h2>
 
     <!-- Course/Qualification -->

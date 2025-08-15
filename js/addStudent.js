@@ -108,7 +108,7 @@
   </style>
 
   <form id="learnerForm">
-    <div id="idPictureBox">I.D. Picture</div>
+    <img id="idPictureBox">I.D. Picture</img>
     <h2>LEARNER'S PROFILE FORM</h2>
 
     <!-- Course/Qualification -->
