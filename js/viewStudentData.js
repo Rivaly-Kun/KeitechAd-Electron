@@ -41,44 +41,7 @@ document.querySelectorAll('.view-btn').forEach(btn => {
     // Get student from DB
     const student = await window.api.getAdmissionById(studentId);
 
-    const idPicPath = student.id_picture ? `./${student.id_picture}` : null;
-    const sig1Path = student.signature_image ? `./${student.signature_image}` : null;
-    const sig2Path = student.voucher_signature_image ? `./${student.voucher_signature_image}` : null;
 
-// Convert to file:// URLs
-const idPicURL = idPicPath ? `file://${idPicPath.replace(/\\/g, '/')}` : null;
-const sig1URL = sig1Path ? `file://${sig1Path.replace(/\\/g, '/')}` : null;
-const sig2URL = sig2Path ? `file://${sig2Path.replace(/\\/g, '/')}` : null;
-
-
-// --- Display ID Picture ---
-if (idPicURL) {
-    document.getElementById('idPictureBox').innerHTML = `
-        <img src="${idPicURL}" alt="ID Picture" style="max-width:300px; border:1px solid #000;">
-    `;
-}
-
-// --- Display Signature 1 in canvas ---
-if (sig1URL) {
-    const canvas1 = document.getElementById('signaturePad1');
-    const ctx1 = canvas1.getContext('2d');
-    const img1 = new Image();
-    img1.src = sig1URL;
-    img1.onload = () => {
-        ctx1.drawImage(img1, 0, 0, canvas1.width, canvas1.height);
-    };
-}
-
-// --- Display Signature 2 in canvas ---
-if (sig2URL) {
-    const canvas2 = document.getElementById('signaturePad2');
-    const ctx2 = canvas2.getContext('2d');
-    const img2 = new Image();
-    img2.src = sig2URL;
-    img2.onload = () => {
-        ctx2.drawImage(img2, 0, 0, canvas2.width, canvas2.height);
-    };
-}
 
 
 
@@ -411,7 +374,7 @@ if (sig2URL) {
           });
 
           idPictureBox.addEventListener('click', () => {
-           // console.log('ID picture box clicked'); // ✅ ADDED
+         
             fileInput.click();
           });
         },
@@ -462,8 +425,8 @@ if (sig2URL) {
 
     result.id_picture = idPictureBase64;
 
-    // ✅ Asynchronous DB call with validation
-    return window.api.insertStudent(result)
+    
+    return window.api.insertOrUpdateStudent(result)
       .then(response => {
         if (response.success) {
           return result;
