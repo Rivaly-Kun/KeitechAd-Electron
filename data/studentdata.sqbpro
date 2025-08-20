@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="studentdata.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="query browser pragmas structure" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="6089"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="sqlite_sequence" custom_title="0" dock_id="1" table="4,15:mainsqlite_sequence"/><dock_state state="000000ff00000000fd0000000100000002000005bb000003b7fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000005bb0000011e00ffffff000002690000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="sqlite_sequence" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="151"/><column index="2" value="35"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="std_admissionForm" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="73"/><column index="2" value="35"/><column index="3" value="121"/><column index="4" value="68"/><column index="5" value="70"/><column index="6" value="85"/><column index="7" value="66"/><column index="8" value="92"/><column index="10" value="128"/><column index="11" value="68"/><column index="12" value="35"/><column index="13" value="91"/><column index="14" value="67"/><column index="15" value="44"/><column index="16" value="43"/><column index="17" value="41"/><column index="18" value="62"/><column index="19" value="77"/><column index="20" value="57"/><column index="21" value="64"/><column index="22" value="44"/><column index="23" value="117"/><column index="24" value="173"/><column index="25" value="115"/><column index="26" value="171"/><column index="27" value="117"/><column index="28" value="111"/><column index="29" value="173"/><column index="30" value="48"/><column index="31" value="147"/><column index="32" value="161"/><column index="33" value="174"/><column index="34" value="173"/><column index="35" value="143"/><column index="36" value="92"/><column index="37" value="60"/><column index="38" value="121"/><column index="39" value="74"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">CREATE TABLE student_admissions  (
+    student_no TEXT PRIMARY KEY,
+    uir TEXT,
+    date_of_application TEXT,
+
+    -- Personal Information
+    last_name TEXT,
+    first_name TEXT,
+    middle_name TEXT,
+    ext_name TEXT,
+    marital_status TEXT,
+    birth_place_city TEXT,
+    birth_place_province TEXT,
+    birth_date TEXT,
+    sex TEXT,
+
+    -- Contact Information
+    email_address TEXT,
+    mobile_no TEXT,
+    tel_no TEXT,
+    street TEXT,
+    purok TEXT,
+    barangay TEXT,
+    municipality TEXT,
+    province TEXT,
+    city_town TEXT,
+    region TEXT,
+
+    -- Educational Background
+    elementary_school TEXT,
+    elementary_year_graduated TEXT,
+    junior_high_school TEXT,
+    junior_high_year_graduated TEXT,
+    senior_high_school TEXT,
+    senior_high_track TEXT,
+    senior_high_year_graduated TEXT,
+    college TEXT,
+    college_year_graduated TEXT,
+
+    -- Emergency Contact
+    emergency_contact_name TEXT,
+    emergency_contact_address TEXT,
+    emergency_contact_relation TEXT,
+    emergency_contact_no TEXT,
+
+    -- Sector Applied For
+    sector_applied TEXT,
+    tesda_nc TEXT,
+    other_qualifications TEXT,
+
+    -- Photo / Attachment
+    photo_path TEXT
+);
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
