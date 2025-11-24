@@ -22,7 +22,7 @@
     "electronmon": "^1.1.2"
   },
   "dependencies": {
-    "better-sqlite3": "^12.2.0",
+    "better-sqlite3": "^12.4.6",
     "sweetalert2": "^11.22.3",
     "tesseract.js": "^6.0.1"
   }
